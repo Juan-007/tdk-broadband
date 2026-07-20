@@ -127,6 +127,7 @@ if "SUCCESS" in loadmodulestatus.upper():
     tdkTestObj.executeTestCase(expectedresult);
     actualresult = tdkTestObj.getResult();
     details = tdkTestObj.getResultDetails();
+    initialValue=details
     flag=0;
     #Ensure Device.Cellular.Interface.1.Enable is false
     if details == "true":
@@ -290,10 +291,9 @@ if "SUCCESS" in loadmodulestatus.upper():
 
     #Revert to original values
     if flag == 1:
-        setVal = "false"
         tdkTestObj = obj.createTestStep('TDKB_TR181Stub_Set');
         tdkTestObj.addParameter("ParamName","Device.Cellular.Interface.1.Enable");
-        tdkTestObj.addParameter("ParamValue",setVal);
+        tdkTestObj.addParameter("ParamValue",initialValue);
         tdkTestObj.addParameter("Type","bool");
 
         #Execute testcase in DUT
